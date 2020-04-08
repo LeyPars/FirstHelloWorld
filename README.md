@@ -1,5 +1,6 @@
 # FirstHelloWorld
-test_repository
-This is My first test Github Project!
-Hello,world!
-date:2020/04/06
+
+Description:This is my premature solution for Leetcode 30Day Challenge!
+Language:C plusplus
+
+date:2020/04/01
