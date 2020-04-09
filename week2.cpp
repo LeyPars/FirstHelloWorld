@@ -29,3 +29,31 @@ ListNode* middleNode(ListNode* head)
     }
     return slow;
 }
+
+/*
+title:Backspace String Compare
+description:Given two string S and T,return if they are equal when both are typed into empty text editors.# means a backspace character.
+Example 1:
+	Input:S="ab#c",T="ad#c"
+	Output: true
+	Explanation:Both S and T become "ac".
+Note:
+	1. 1<=S.length()<=200
+	2. 1<=T.length()<=200
+	3. S and T only contain lowercase letters and '#' charaters.
+Follow up:
+	can you solve it in O(N) time and O(1) space?
+*/
+
+bool backspaceCompare(string S, string T) {
+    int i=S.length()-1,j=T.length()-1;
+    int cnt1=0,cnt2=0;
+    while(i>=0||j>=0)
+    {
+        while(i>=0&&(S[i]=='#'||cnt1)) S[i--]=='#'?++cnt1:--cnt1;
+        while(j>=0&&(T[j]=='#'||cnt2)) T[j--]=='#'?++cnt2:--cnt2;
+        if(i<0||j<0) return i==j;
+        if(S[i--]!=T[j--]) return false;
+    }
+    return i==j;
+}
