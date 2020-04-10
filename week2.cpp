@@ -57,3 +57,44 @@ bool backspaceCompare(string S, string T) {
     }
     return i==j;
 }
+
+/*
+title:min stack
+description:
+	Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+    push(x) -- Push element x onto stack.
+    pop() -- Removes the element on top of the stack.
+    top() -- Get the top element.
+    getMin() -- Retrieve the minimum element in the stack.
+*/
+class MinStack {
+public:
+    /** initialize your data structure here. */
+    stack<pair<int,int>> st;
+    MinStack() {
+        while(!st.empty()) st.pop();
+     }
+    
+    void push(int x) {
+        if(st.empty())
+        {
+            st.push({x,x});
+        }
+        else
+        {
+            st.push({x,min(st.top().second,x)});
+        }
+    }
+    
+    void pop() {
+        st.pop();
+    }
+    
+    int top() {
+        return st.top().first;
+    }
+    
+    int getMin() {
+        return st.top().second;
+    }
+};
