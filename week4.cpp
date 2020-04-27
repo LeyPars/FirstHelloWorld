@@ -204,3 +204,35 @@ int longestCommonSubsequence(string text1, string text2) {
         }
         return dp[m][n];
     }
+	
+/*
+title: Maximal Square
+description:Given a 2D binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area.
+Example:
+	Input: 
+		1 0 1 0 0
+		1 0 1 1 1
+		1 1 1 1 1
+		1 0 0 1 0
+	Output: 4
+*/
+int maximalSquare(vector<vector<char>>& matrix) {
+        const int m=matrix.size();
+        if(m==0) return 0;
+        const int n=matrix[0].size();
+        if(n==0) return 0;
+        vector<vector<int>> dp(m+1,vector<int>(n+1,0));
+        int edge = 0;
+        for(int i=0;i<m;++i) for(int j=0;j<n;++j)
+        {
+            if(matrix[i][j]=='0') continue;
+            dp[i+1][j+1]=1+min({dp[i][j+1],dp[i+1][j],dp[i][j]});
+            edge = max(edge,dp[i+1][j+1]);
+        }
+        return edge*edge;
+    }
+
+
+
+
+
