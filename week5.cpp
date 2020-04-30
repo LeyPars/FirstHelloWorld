@@ -36,3 +36,33 @@ public:
         return ans;
     }
 };
+/*
+title:Check If a String Is a Valid Sequence from Root to Leaves Path in a Binary Tree
+description:Given a binary tree where each path going from the root to any leaf form a valid sequence, 
+	check if a given string is a valid sequence in such binary tree. 
+	We get the given string from the concatenation of an array of integers arr and the concatenation 
+	of all values of the nodes along a path results in a sequence in the given binary tree.
+Example 1:
+	Input: root = [0,1,0,0,1,0,null,null,1,0,0], arr = [0,1,0,1]
+	Output: true
+	Explanation: 
+	The path 0 -> 1 -> 0 -> 1 is a valid sequence (green color in the figure). 
+	Other valid sequences are: 
+	0 -> 1 -> 1 -> 0 
+	0 -> 0 -> 0
+*/
+class Solution {
+public:
+    int n;
+    bool dfs(TreeNode* root,int idx,vector<int>& arr)
+    {
+        if(idx==n-1&&root!=NULL&&root->left==NULL&&root->right==NULL&&
+          arr[idx]==root->val) return true;
+        if(idx==n-1||root==nullptr||root->val!=arr[idx]) return false;
+        return dfs(root->left,idx+1,arr)||dfs(root->right,idx+1,arr);
+    }
+    bool isValidSequence(TreeNode* root, vector<int>& arr) {
+        n=arr.size();
+        return dfs(root,0,arr);
+    }
+};
